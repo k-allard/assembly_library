@@ -129,7 +129,7 @@ void    test_strcmp()
 
 	std = strcmp(null_string, short_string);
 	my = ft_strcmp(null_string, short_string);
-	printf("\nReturn values are %d = %d", std, my);
+	printf("Return values are %d = %d", std, my);
 
 	printf("\n\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n");
 	printf("    Test #3: empty string 2nd arg  ");
@@ -191,6 +191,7 @@ void		test_write()
 	printf("    Test #3: write to opened fd    ");
 	printf("\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n");
 
+	errno = 0;
 	string = "short string\n";
 	fd = open("test.txt", O_RDWR);
 	printf("errno before write - %d\n", errno);
@@ -199,6 +200,8 @@ void		test_write()
 	printf("errno after - %d\n", errno);
 	if (errno == 0)
 		printf("Success! Check test.txt\n");
+
+	errno = 0;
 	printf("\nerrno before ft_write - %d\n", errno);
 	printf("Writing . . .\n");    
 	std = ft_write(fd, string, strlen(string));
@@ -212,6 +215,7 @@ void		test_write()
 	printf("\n-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n");
 
 	string = "short string\n";
+	errno = 0;
 	printf("errno before write - %d\n", errno);
 	printf("Writing . . .\n");
 	std = write(-1, string, strlen(string));
@@ -258,8 +262,15 @@ void        test_read()
 	printf("string before ft_read - [%s]\n", string);
 	printf("Reading . . .\n");
 	my = ft_read(fd, string, 5);
-	printf("string now: [%s]\n", string);
 	printf("return value: %d\n\n", my);
+	if (my == -1)
+	{
+		printf("error!\nerrno is - %d\n", errno);
+		printf("errno transcript - %s\n\n", strerror(errno));
+	}
+	else
+		printf("string now: [%s]\n\n", string);
+
 	close(fd);
 
 	printf("-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-\n");
