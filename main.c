@@ -280,14 +280,14 @@ void        test_read()
 	errno = 0;
 	printf("errno before read - %d\n", errno);
 	printf("Reading . . .\n");
-	std = ft_read(-1, string, 5);
+	std = read(-1, string, 5);
 	printf("errno after - %d\n", errno);
 	printf("errno transcript - %s\n", strerror(errno));
 
 	errno = 0;
 	printf("\nerrno before ft_write - %d\n", errno);
 	printf("Writing . . .\n");    
-	std = ft_write(-1, string, strlen(string));
+	std = ft_read(-1, string, strlen(string));
 	printf("errno after - %d\n", errno);
 	printf("errno transcript - %s\n\n", strerror(errno));
 }
